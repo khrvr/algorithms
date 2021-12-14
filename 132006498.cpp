@@ -1,50 +1,39 @@
+
+//132006498 - номер оригинальной посылки
+
+//139331883 - номер посылки с обновленной версией 
+
 #include <iostream>
 #include <vector>
 #include <stdio.h>
-#include <random>
 
 using namespace std;
 
-int sign(int a) {
-	if (a == 0) {
-		return 0;
-	}
-	else if (a < 0) {
-		return -1;
-	}
-	else {
-		return 1;
-	}
-}
-
-void partition(int pivot, vector <int>& arr, vector <int>& part_arr, char c) {
-	int check = 0;
-	if (c == '<') {
-		check = 1;
-	}
-	else if (c == '>') {
-		check = -1;
-	}
-	for (int i = 0; i < arr.size(); ++i) {
-		if (sign(pivot - arr[i]) == check) {
-			part_arr.push_back(arr[i]);
+pair<int, int> partition(vector <int>& arr, int start, int end, int pivot) {
+	int numOfElem1 = 0;
+	int arrIndex = start;
+	for (int i = start; i < end; ++i) {
+		if (arr[i] < pivot) {
+			swap(arr[i], arr[arrIndex++]);
+			++numOfElem1;
 		}
 	}
+	int numOfElem2 = 0;
+	for (int i = start + numOfElem1; i < end; ++i) {
+		if (arr[i] == pivot) {
+			swap(arr[i], arr[arrIndex++]);
+			++numOfElem2;
+		}
+	}
+	return { numOfElem1, numOfElem2 };
 }
 
-void quickSort(vector <int>& arr) {
-	int pivot;
-	vector <int> part_arr;
-	vector <int> part_arrC;
-	if (arr.size() > 1) {
-		pivot = arr[rand() % arr.size()];
-		partition(pivot, arr, part_arr, '<');
-		quickSort(part_arr);
-		partition(pivot, arr, part_arr, '=');
-		partition(pivot, arr, part_arrC, '>');
-		quickSort(part_arrC);
-		arr = move(part_arr);
-		arr.insert(arr.end(), part_arrC.begin(), part_arrC.end());
+void quickSort(vector <int>& arr, int start, int end) {
+	if (end - start > 1) {
+		int pivot = arr[start + rand() % (end - start)];
+		pair<int, int> numOfElem = partition(arr, start, end, pivot);
+		quickSort(arr, start, start + numOfElem.first);
+		quickSort(arr, start + numOfElem.first + numOfElem.second, end);
 	}
 }
 
@@ -60,7 +49,7 @@ int main() {
 		cin >> input;
 		arr.push_back(input);
 	}
-	quickSort(arr);
+	quickSort(arr, 0, n);
 	for (int i = 0; i < arr.size(); ++i) {
 		cout << arr[i] << " ";
 	}
