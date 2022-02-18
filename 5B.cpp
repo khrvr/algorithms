@@ -33,7 +33,7 @@ void update(vector<pair<int, int>>& fentree, int index, int val) {
 //Порядок пересчета - элементы по возрастанию
 //Ответ - наибольшее число среди всех
 
-void lds(vector<int>& inp, vector<int>& ans) { //largest decreasing subsequence
+void lds(const vector<int>& inp, vector<int>& ans) { //largest decreasing subsequence
 	int inpSz = inp.size();
 	vector<pair<int, int>> sortedInp(inpSz);
 	for (int i = 0; i < inpSz; ++i) {
