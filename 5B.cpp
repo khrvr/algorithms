@@ -16,7 +16,7 @@ int g(int i) {
 	return (i | (i + 1));
 }
 
-pair<int, int> getPrefMax(vector<pair<int, int>>& fentree, int index) {
+pair<int, int> getPrefMax(const vector<pair<int, int>>& fentree, int index) {
 	pair<int, int> answer = { INT_MIN, INT_MIN };
 	for (int i = index; i >= 0; i = f(i) - 1) answer = std::max(answer, fentree[i]);
 	return answer;
