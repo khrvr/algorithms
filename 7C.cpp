@@ -8,7 +8,7 @@ using std::vector;
 using std::cin;
 using std::cout;
 
-void getMyCycle(int start, int end, vector<int>& parent) {
+void getMyCycle(int start, int end, const vector<int>& parent) {
 	cout << "YES" << std::endl;
 	vector<int> ans;
 	int v = start;
@@ -22,7 +22,7 @@ void getMyCycle(int start, int end, vector<int>& parent) {
 	}
 }
 
-bool dfs(int v, vector<vector<int>>& graph, vector<int>& parent, vector<int>& color) {
+bool dfs(int v, const vector<vector<int>>& graph, vector<int>& parent, vector<int>& color) {
 	color[v] = 1;
 	bool cycleFound = false;
 	for (int i = 0; i < graph[v].size(); ++i) {
