@@ -26,7 +26,6 @@ void dijkstra(const vector<vector<int>>& g, const vector<edge>& edges, vector<in
 	distHeap.decreaseKey(s, inf);
 	while (!distHeap.empty()) {
 		int v = distHeap.getMinKey();
-		dist[v] = distHeap.getMin();
 		if (dist[v] == inf) return;
 		distHeap.extractMin();
 		for (int eInd : g[v]) {
