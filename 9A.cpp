@@ -20,7 +20,7 @@ struct edge {
     int weight;
 };
 
-int kruskal(const vector<vector<int>>& graph, const vector<edge>& edges) {
+int prim(const vector<vector<int>>& graph, const vector<edge>& edges) {
     int sum = 0;
     vector<bool> taken(graph.size(), false);
     binHeap<int, int> cheapestEdges;
@@ -60,5 +60,5 @@ int main() {
         graph[b - 1].push_back(i);
         graph[e - 1].push_back(i);
     }
-    cout << kruskal(graph, edges);
+    cout << prim(graph, edges);
 }
